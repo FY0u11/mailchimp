@@ -9,10 +9,17 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Mailchimp implements MailchimpInterface
 {
+    protected const BASE_API_URL = 'https://api.mailchimp.com/3.0';
+
     /**
      * @var string
      */
-    private string $_url = 'https://api.mailchimp.com/3.0';
+    private string $_url;
+
+    /**
+     * @var Helper
+     */
+    protected Helper $helper;
 
     /**
      * @var HttpClientInterface
@@ -24,14 +31,18 @@ class Mailchimp implements MailchimpInterface
      */
     public Root $root;
 
-    /**
-     * @param string $apiKey
-     */
-    public function __construct(string $apiKey)
+    public function __construct()
     {
+        $this->helper = new Helper();
         $this->root = new Root($this);
+    }
 
-        $this->init($apiKey);
+    /**
+     * @inheritdoc
+     */
+    public function initialize(string $apiKey)
+    {
+        $this->_init($apiKey);
     }
 
     /**
@@ -43,7 +54,7 @@ class Mailchimp implements MailchimpInterface
         $bodyParams=null,
         $method=HttpMethod::GET
     ): array {
-        $queryString = $this->buildQueryString($queryParams);
+        $queryString = $this->helper->buildQueryString($queryParams);
         $url = $this->_url . $urn . $queryString;
         $options = ['body' => $bodyParams];
         try {
@@ -59,59 +70,35 @@ class Mailchimp implements MailchimpInterface
      * @param $apiKey
      * @return void
      */
-    protected function init($apiKey)
+    private function _init($apiKey)
     {
-        $this->initHttpClient($apiKey);
-        $this->setBaseApiUrl($apiKey);
+        $this->_client = $this->getHttpClient($apiKey);
+        $this->_url = $this->getBaseApiUrl($apiKey);
     }
 
     /**
      * @param string $apiKey
-     * @return void
+     * @return HttpClientInterface
      */
-    protected function initHttpClient(string $apiKey)
+    protected function getHttpClient(string $apiKey): HttpClientInterface
     {
-        $this->_client = HttpClient::create([
+        return HttpClient::create([
             'auth_basic' => "noname:$apiKey"
         ]);
     }
 
     /**
      * @param string $apiKey
-     * @return void
+     * @return string
      */
-    protected function setBaseApiUrl(string $apiKey)
+    protected function getBaseApiUrl(string $apiKey): string
     {
         $dc = 'us1';
         if (strstr($apiKey, '-')){
             list($key, $dc) = explode('-', $apiKey, 2);
-            if (!$dc) {
-                $dc = 'us1';
-            }
         }
-        $this->_url = str_replace('https://api', 'https://' . $dc . '.api', $this->_url);
-        $this->_url = rtrim($this->_url, '/') . '/';
-    }
+        $url = str_replace('https://api', 'https://' . $dc . '.api', self::BASE_API_URL);
 
-    /**
-     * @param array|null $queryParams
-     * @return string
-     */
-    protected function buildQueryString(?array $queryParams): string
-    {
-        if (is_null($queryParams) || count($queryParams) === 0) {
-            return '';
-        }
-        $paramsJoined = [];
-        foreach ($queryParams as $key => $value) {
-            if (is_null($value) || count($value) === 0) {
-                continue;
-            }
-            $paramsJoined[] = "$key=" . (is_array($value) ? implode(',', $value) : $value);
-        }
-        if (empty($paramsJoined)) {
-            return '';
-        }
-        return '?' . implode('&', $paramsJoined);
+        return rtrim($url, '/') . '/';
     }
 }

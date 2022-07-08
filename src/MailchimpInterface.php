@@ -10,6 +10,11 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 interface MailchimpInterface
 {
     /**
+     * @param string $apiKey
+     */
+    public function initialize(string $apiKey);
+
+    /**
      * @param string $urn
      * @param array|null $queryParams
      * @param array|null $bodyParams
