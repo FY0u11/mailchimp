@@ -52,7 +52,9 @@ class MailchimpTest extends TestCase
         list($httpClientMock, $mailchimpMock) = $this->getMocks();
 
         $httpClientMock->expects($this->once())->method('request')->with(
-            HttpMethod::POST, "https://$us.api.mailchimp.com/3.0/$urn?user_id=1022", ['body' => $bodyParams]
+            HttpMethod::POST,
+            "https://$us.api.mailchimp.com/3.0/$urn?user_id=1022",
+            ['body' => json_encode($bodyParams)]
         );
 
         $mailchimpMock->initialize("qazwsxedcrfvtgbyhn-$us");

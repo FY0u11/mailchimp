@@ -63,7 +63,10 @@ class Mailchimp implements MailchimpInterface
     ): array {
         $queryString = $this->helper->buildQueryString($queryParams);
         $url = $this->_url . $urn . $queryString;
-        $options = ['body' => json_encode($bodyParams)];
+        $options = [];
+        if (!is_null($bodyParams)) {
+            $options['body'] = json_encode($bodyParams);
+        }
         try {
             return $this->_client->request($method, $url, $options)->toArray();
         } catch (ClientException $clientException) {
