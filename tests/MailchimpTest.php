@@ -70,6 +70,9 @@ class MailchimpTest extends TestCase
         $httpClientMock->method('request')->willThrowException(new $exception($errorMsg));
 
         $mailchimpMock->initialize('qazwsxedcrfvtgbyhn');
+        $this->assertEquals([], $mailchimpMock->call('test'));
+
+        $httpClientMock->method('request')->willThrowException(new \Exception($errorMsg));
         $this->assertEquals(['error' => $errorMsg], $mailchimpMock->call('test'));
     }
 

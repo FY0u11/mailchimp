@@ -3,9 +3,9 @@
 namespace Mailchimp;
 
 use Mailchimp\Api\AccountExports;
-use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\HttpClient;
 use Mailchimp\Api\Root;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Mailchimp implements MailchimpInterface
@@ -69,7 +69,7 @@ class Mailchimp implements MailchimpInterface
         }
         try {
             return $this->_client->request($method, $url, $options)->toArray();
-        } catch (ClientException $clientException) {
+        } catch (ClientExceptionInterface $clientException) {
             return $clientException->getResponse()->toArray(false);
         } catch (\Throwable $throwable) {
             return [
