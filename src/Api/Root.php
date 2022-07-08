@@ -2,23 +2,20 @@
 
 namespace Mailchimp\Api;
 
-use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-
+/**
+ * The API root resource links to all other resources available in the API. Calling the root directory
+ * also returns details about the Mailchimp user account.
+ */
 class Root extends AbstractApi
 {
     /**
+     * Get links to all other resources available in the API.
+     *
      * @param array|null $fields
      * @param array|null $exclude_fields
      * @return array
-     * @throws DecodingExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      */
-    public function get(array $fields = null, array $exclude_fields = null): array
+    public function getAll(array $fields = null, array $exclude_fields = null): array
     {
         return $this->mailchimp->call('', compact('fields', 'exclude_fields'));
     }

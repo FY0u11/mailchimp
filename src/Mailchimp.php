@@ -2,9 +2,10 @@
 
 namespace Mailchimp;
 
+use Mailchimp\Api\AccountExports;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\HttpClient;
 use Mailchimp\Api\Root;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Mailchimp implements MailchimpInterface
@@ -31,10 +32,16 @@ class Mailchimp implements MailchimpInterface
      */
     public Root $root;
 
+    /**
+     * @var AccountExports
+     */
+    public AccountExports $accountExports;
+
     public function __construct()
     {
         $this->helper = new Helper();
         $this->root = new Root($this);
+        $this->accountExports = new AccountExports($this);
     }
 
     /**
@@ -56,12 +63,14 @@ class Mailchimp implements MailchimpInterface
     ): array {
         $queryString = $this->helper->buildQueryString($queryParams);
         $url = $this->_url . $urn . $queryString;
-        $options = ['body' => $bodyParams];
+        $options = ['body' => json_encode($bodyParams)];
         try {
             return $this->_client->request($method, $url, $options)->toArray();
-        } catch (ClientExceptionInterface $clientException) {
+        } catch (ClientException $clientException) {
+            return $clientException->getResponse()->toArray(false);
+        } catch (\Throwable $throwable) {
             return [
-                'error' => $clientException->getMessage(),
+                'error' => $throwable->getMessage(),
             ];
         }
     }
