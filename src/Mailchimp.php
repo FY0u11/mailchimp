@@ -12,6 +12,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class Mailchimp implements MailchimpInterface
 {
     protected const BASE_API_URL = 'https://api.mailchimp.com/3.0';
+    protected const USER_AGENT = 'Ebizmart-MailChimp-PHP/3.0.0';
 
     /**
      * @var string
@@ -102,7 +103,10 @@ class Mailchimp implements MailchimpInterface
     protected function getHttpClient(string $apiKey): HttpClientInterface
     {
         return HttpClient::create([
-            'auth_basic' => "noname:$apiKey"
+            'auth_basic' => "noname:$apiKey",
+            'headers' => [
+                'User-Agent' => self::USER_AGENT,
+            ]
         ]);
     }
 
