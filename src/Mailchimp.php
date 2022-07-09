@@ -7,6 +7,7 @@ use Mailchimp\Api\AuthorizedApps;
 use Mailchimp\Api\Automations\Automations;
 use Mailchimp\Api\BatchOperations\BatchOperations;
 use Mailchimp\Api\BatchWebhooks;
+use Mailchimp\Api\CampaignFolders;
 use Mailchimp\Api\Root;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -66,6 +67,11 @@ class Mailchimp implements MailchimpInterface
     public BatchWebhooks $batchWebhooks;
 
     /**
+     * @var CampaignFolders Organize your campaigns using folders.
+     */
+    public CampaignFolders $campaignFolders;
+
+    /**
      * Mailchimp Marketing API
      */
     public function __construct()
@@ -77,6 +83,7 @@ class Mailchimp implements MailchimpInterface
         $this->automations = new Automations($this);
         $this->batchOperations = new BatchOperations($this);
         $this->batchWebhooks = new BatchWebhooks($this);
+        $this->campaignFolders = new CampaignFolders($this);
     }
 
     /**
