@@ -3,6 +3,7 @@
 namespace Mailchimp;
 
 use Mailchimp\Api\AccountExports;
+use Mailchimp\Api\AuthorizedApps;
 use Symfony\Component\HttpClient\HttpClient;
 use Mailchimp\Api\Root;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -37,11 +38,17 @@ class Mailchimp implements MailchimpInterface
      */
     public AccountExports $accountExports;
 
+    /**
+     * @var AuthorizedApps
+     */
+    public AuthorizedApps $authorizedApps;
+
     public function __construct()
     {
         $this->helper = new Helper();
         $this->root = new Root($this);
         $this->accountExports = new AccountExports($this);
+        $this->authorizedApps = new AuthorizedApps($this);
     }
 
     /**

@@ -2,12 +2,10 @@
 
 namespace Mailchimp\Api;
 
-use Mailchimp\HttpMethod;
-
 /**
- * Generate a new export or download a finished export.
+ * Manage registered, connected apps for your Mailchimp account with the Authorized Apps endpoints.
  */
-class AccountExports extends AbstractApi
+class AuthorizedApps extends AbstractApi
 {
     /**
      * Get a list of account exports for a given account.
@@ -28,45 +26,26 @@ class AccountExports extends AbstractApi
         ?int $offset=null
     ): array {
         return $this->mailchimp->call(
-            'account-exports',
+            'authorized-apps',
             compact('fields', 'exclude_fields', 'count', 'offset')
         );
     }
 
     /**
-     * Get information about a specific account export.
+     * Get information about a specific authorized application.
      *
-     * @param string $exportId            The unique id for the account export.
+     * @param string $appId               The unique id for the account export.
      * @param array|null $fields          A comma-separated list of fields to return. Reference parameters of
      *                                    sub-objects with dot notation.
      * @param array|null $exclude_fields  A comma-separated list of fields to exclude. Reference parameters of
      *                                    sub-objects with dot notation.
      * @return array
      */
-    public function getById(string $exportId, ?array $fields=null, ?array $exclude_fields=null): array
+    public function getById(string $appId, ?array $fields=null, ?array $exclude_fields=null): array
     {
         return $this->mailchimp->call(
-            "account-exports/$exportId",
+            "authorized-apps/$appId",
             compact('fields', 'exclude_fields')
-        );
-    }
-
-    /**
-     * Create a new account export in your Mailchimp account.
-     *
-     * @param array $include_stages         The stages of an account export to include.
-     * @param string|null $since_timestamp  An ISO 8601 date that will limit the export to only records created after a
-     *                                      given time. For instance, the reports stage will contain any campaign sent
-     *                                      after the given timestamp. Audiences, however, are excluded from this limit.
-     * @return array
-     */
-    public function add(array $include_stages, ?string $since_timestamp = null): array
-    {
-        return $this->mailchimp->call(
-            'account-exports',
-            null,
-            compact('include_stages', 'since_timestamp'),
-            HttpMethod::POST
         );
     }
 }
