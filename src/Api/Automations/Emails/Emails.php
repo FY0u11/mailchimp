@@ -15,7 +15,8 @@ class Emails extends BaseApi
      *
      * Get a summary of the emails in a classic automation workflow.
      *
-     * @param string $workflowId The unique id for the Automation workflow.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
      * @return array
      */
     public function getAll(string $workflowId): array
@@ -28,8 +29,10 @@ class Emails extends BaseApi
      *
      * Get information about an individual classic automation workflow email.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $workflowEmailId The unique id for the Automation workflow email.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $workflowEmailId
+     * The unique id for the Automation workflow email.
      * @return array
      */
     public function getById(string $workflowId, string $workflowEmailId): array
@@ -43,8 +46,10 @@ class Emails extends BaseApi
      * Removes an individual classic automation workflow email. Emails from certain workflow types, including the
      * Abandoned Cart Email (abandonedCart) and Product Retargeting Email (abandonedBrowse) Workflows, cannot be deleted.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $workflowEmailId The unique id for the Automation workflow email.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $workflowEmailId
+     * The unique id for the Automation workflow email.
      * @return array
      */
     public function delete(string $workflowId, string $workflowEmailId): array
@@ -63,11 +68,14 @@ class Emails extends BaseApi
      * Update settings for a classic automation workflow email. Only works with workflows of type: abandonedBrowse,
      * abandonedCart, emailFollowup, or singleWelcome.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $workflowEmailId The unique id for the Automation workflow email.
-     * @param Delay|null $delay       The delay settings for an automation email.
-     * @param Settings|null $settings Settings for the campaign including the email subject, from name, and from
-     *                                email address.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $workflowEmailId
+     * The unique id for the Automation workflow email.
+     * @param Delay|null $delay
+     * The delay settings for an automation email.
+     * @param Settings|null $settings
+     * Settings for the campaign including the email subject, from name, and from email address.
      * @return array
      */
     public function update(
@@ -89,8 +97,10 @@ class Emails extends BaseApi
      *
      * Start an automated email.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $workflowEmailId The unique id for the Automation workflow email.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $workflowEmailId
+     * The unique id for the Automation workflow email.
      * @return array
      */
     public function start(string $workflowId, string $workflowEmailId): array
@@ -108,8 +118,10 @@ class Emails extends BaseApi
      *
      * Pause an automated email.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $workflowEmailId The unique id for the Automation workflow email.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $workflowEmailId
+     * The unique id for the Automation workflow email.
      * @return array
      */
     public function pause(string $workflowId, string $workflowEmailId): array

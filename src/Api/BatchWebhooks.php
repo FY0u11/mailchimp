@@ -14,13 +14,14 @@ class BatchWebhooks extends BaseApi
      *
      * Get all webhooks that have been configured for batches.
      *
-     * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of
-     *                                   sub-objects with dot notation.
-     * @param array|null $exclude_fields A comma-separated list of fields to exclude. Reference parameters of
-     *                                   sub-objects with dot notation.
-     * @param int|null $count            The number of records to return. Default value is 10. Maximum value is 1000.
-     * @param int|null $offset           Used for pagination, this is the number of records from a collection to skip.
-     *                                   Default value is 0.
+     * @param array|null $fields
+     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * @param array|null $exclude_fields
+     * A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * @param int|null $count
+     * The number of records to return. Default value is 10. Maximum value is 1000.
+     * @param int|null $offset
+     * Used for pagination, this is the number of records from a collection to skip. Default value is 0.
      * @return array
      */
     public function getAll(
@@ -40,11 +41,12 @@ class BatchWebhooks extends BaseApi
      *
      * Get information about a specific batch webhook.
      *
-     * @param string $batchWebhookId     The unique id for the batch webhook.
-     * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of
-     *                                   sub-objects with dot notation.
-     * @param array|null $exclude_fields A comma-separated list of fields to exclude. Reference parameters of
-     *                                   sub-objects with dot notation.
+     * @param string $batchWebhookId
+     * The unique id for the batch webhook.
+     * @param array|null $fields
+     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * @param array|null $exclude_fields
+     * A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      * @return array
      */
     public function getById(string $batchWebhookId, ?array $fields=null, ?array $exclude_fields=null): array
@@ -61,7 +63,8 @@ class BatchWebhooks extends BaseApi
      * Configure a webhook that will fire whenever any batch request completes processing. You may only have a maximum
      * of 20 batch webhooks.
      *
-     * @param string $url A valid URL for the Webhook.
+     * @param string $url
+     * A valid URL for the Webhook.
      * @return array
      */
     public function add(string $url): array
@@ -79,8 +82,10 @@ class BatchWebhooks extends BaseApi
      *
      * Update a webhook that will fire whenever any batch request completes processing.
      *
-     * @param string $batchWebhookId The unique id for the batch webhook.
-     * @param string $url            A valid URL for the Webhook.
+     * @param string $batchWebhookId
+     * The unique id for the batch webhook.
+     * @param string $url
+     * A valid URL for the Webhook.
      * @return array
      */
     public function update(string $batchWebhookId, string $url): array
@@ -98,7 +103,8 @@ class BatchWebhooks extends BaseApi
      *
      * Remove a batch webhook. Webhooks will no longer be sent to the given URL.
      *
-     * @param string $batchWebhookId The unique id for the batch webhook.
+     * @param string $batchWebhookId
+     * The unique id for the batch webhook.
      * @return array
      */
     public function delete(string $batchWebhookId): array

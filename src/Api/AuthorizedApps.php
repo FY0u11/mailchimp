@@ -12,13 +12,14 @@ class AuthorizedApps extends BaseApi
      *
      * Get a list of account exports for a given account.
      *
-     * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of
-     *                                   sub-objects with dot notation.
-     * @param array|null $exclude_fields A comma-separated list of fields to exclude. Reference parameters of
-     *                                   sub-objects with dot notation.
-     * @param int|null $count            The number of records to return. Default value is 10. Maximum value is 1000.
-     * @param int|null $offset           Used for pagination, this is the number of records from a collection to skip.
-     *                                   Default value is 0.
+     * @param array|null $fields
+     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * @param array|null $exclude_fields
+     * A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * @param int|null $count
+     * The number of records to return. Default value is 10. Maximum value is 1000.
+     * @param int|null $offset
+     * Used for pagination, this is the number of records from a collection to skip. Default value is 0.
      * @return array
      */
     public function getAll(
@@ -38,11 +39,12 @@ class AuthorizedApps extends BaseApi
      *
      * Get information about a specific authorized application.
      *
-     * @param string $appId              The unique id for the account export.
-     * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of
-     *                                   sub-objects with dot notation.
-     * @param array|null $exclude_fields A comma-separated list of fields to exclude. Reference parameters of
-     *                                   sub-objects with dot notation.
+     * @param string $appId
+     * The unique id for the account export.
+     * @param array|null $fields
+     * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * @param array|null $exclude_fields
+     * A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      * @return array
      */
     public function getById(string $appId, ?array $fields=null, ?array $exclude_fields=null): array

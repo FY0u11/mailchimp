@@ -15,7 +15,8 @@ class RemovedSubscribers extends BaseApi
      *
      * Get information about subscribers who were removed from a classic automation workflow.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
      * @return array
      */
     public function getAll(string $workflowId): array
@@ -28,8 +29,10 @@ class RemovedSubscribers extends BaseApi
      *
      * Get information about a specific subscriber who was removed from a classic automation workflow.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $subscriberHash  The MD5 hash of the lowercase version of the list member's email address.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $subscriberHash
+     * The MD5 hash of the lowercase version of the list member's email address.
      * @return array
      */
     public function getById(string $workflowId, string $subscriberHash): array
@@ -44,8 +47,10 @@ class RemovedSubscribers extends BaseApi
      * automation workflow, regardless of how many emails they've been sent from that workflow. Once they're removed,
      * they can never be added back to the same workflow.
      *
-     * @param string $workflowId      The unique id for the Automation workflow.
-     * @param string $email_address   The list member's email address.
+     * @param string $workflowId
+     * The unique id for the Automation workflow.
+     * @param string $email_address
+     * The list member's email address.
      * @return array
      */
     public function remove(string $workflowId, string $email_address): array
