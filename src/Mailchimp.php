@@ -4,6 +4,7 @@ namespace Mailchimp;
 
 use Mailchimp\Api\AccountExports;
 use Mailchimp\Api\AuthorizedApps;
+use Mailchimp\Api\Automations\Automations;
 use Symfony\Component\HttpClient\HttpClient;
 use Mailchimp\Api\Root;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -44,12 +45,18 @@ class Mailchimp implements MailchimpInterface
      */
     public AuthorizedApps $authorizedApps;
 
+    /**
+     * @var Automations
+     */
+    public Automations $automations;
+
     public function __construct()
     {
         $this->helper = new Helper();
         $this->root = new Root($this);
         $this->accountExports = new AccountExports($this);
         $this->authorizedApps = new AuthorizedApps($this);
+        $this->automations = new Automations($this);
     }
 
     /**
@@ -73,7 +80,7 @@ class Mailchimp implements MailchimpInterface
         $url = $this->_url . $urn . $queryString;
         $options = [];
         if (!is_null($bodyParams)) {
-            $options['body'] = json_encode($bodyParams);
+            $options['body'] = json_encode($bodyParams, JSON_FORCE_OBJECT);
         }
         try {
             return $this->_client->request($method, $url, $options)->toArray();
