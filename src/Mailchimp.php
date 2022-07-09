@@ -6,6 +6,7 @@ use Mailchimp\Api\AccountExports;
 use Mailchimp\Api\AuthorizedApps;
 use Mailchimp\Api\Automations\Automations;
 use Mailchimp\Api\BatchOperations\BatchOperations;
+use Mailchimp\Api\BatchWebhooks;
 use Mailchimp\Api\Root;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -60,6 +61,11 @@ class Mailchimp implements MailchimpInterface
     public BatchOperations $batchOperations;
 
     /**
+     * @var BatchWebhooks Manage webhooks for batch operations.
+     */
+    public BatchWebhooks $batchWebhooks;
+
+    /**
      * Mailchimp Marketing API
      */
     public function __construct()
@@ -70,6 +76,7 @@ class Mailchimp implements MailchimpInterface
         $this->authorizedApps = new AuthorizedApps($this);
         $this->automations = new Automations($this);
         $this->batchOperations = new BatchOperations($this);
+        $this->batchWebhooks = new BatchWebhooks($this);
     }
 
     /**
