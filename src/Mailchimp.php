@@ -114,6 +114,9 @@ class Mailchimp implements MailchimpInterface
         } catch (ClientExceptionInterface $clientException) {
             return $clientException->getResponse()->toArray(false);
         } catch (\Throwable $throwable) {
+            if ($throwable->getMessage() === 'Response body is empty.') {
+                return [];
+            }
             return [
                 'error' => $throwable->getMessage(),
             ];
