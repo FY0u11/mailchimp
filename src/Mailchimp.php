@@ -5,6 +5,7 @@ namespace Mailchimp;
 use Mailchimp\Api\AccountExports;
 use Mailchimp\Api\AuthorizedApps;
 use Mailchimp\Api\Automations\Automations;
+use Mailchimp\Api\Emails\Emails;
 use Symfony\Component\HttpClient\HttpClient;
 use Mailchimp\Api\Root;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -31,25 +32,36 @@ class Mailchimp implements MailchimpInterface
     private HttpClientInterface $_client;
 
     /**
-     * @var Root
+     * @var Root The API root resource links to all other resources available in the API. Calling the root directory
+     *           also returns details about the Mailchimp user account.
      */
     public Root $root;
 
     /**
-     * @var AccountExports
+     * @var AccountExports Generate a new export or download a finished export.
      */
     public AccountExports $accountExports;
 
     /**
-     * @var AuthorizedApps
+     * @var AuthorizedApps Manage registered, connected apps for your Mailchimp account with the Authorized Apps endpoints.
      */
     public AuthorizedApps $authorizedApps;
 
     /**
-     * @var Automations
+     * @var Automations Mailchimp's classic automations feature lets you build a series of emails that send to
+     *                  subscribers when triggered by a specific date, activity, or event. Use the API to manage
+     *                  Automation workflows, emails, and queues. Does not include Customer Journeys.
      */
     public Automations $automations;
 
+    /**
+     * @var Emails Manage individual emails in a classic automation workflow.
+     */
+    public Emails $emails;
+
+    /**
+     * Mailchimp Marketing API
+     */
     public function __construct()
     {
         $this->helper = new Helper();
@@ -57,6 +69,7 @@ class Mailchimp implements MailchimpInterface
         $this->accountExports = new AccountExports($this);
         $this->authorizedApps = new AuthorizedApps($this);
         $this->automations = new Automations($this);
+        $this->emails = new Emails($this);
     }
 
     /**

@@ -20,16 +20,17 @@ class BaseApi implements BaseApiInterface
     }
 
     /**
-     * @inheritdoc
+     * @param array $objects
+     * @return array
      */
-    public function parseObjectsToArray(array $objects): array
+    protected function parseObjectsToArray(array $objects): array
     {
         $arrayToReturn = [];
-        /** @var BaseObjectInterface|null $objectValue */
         foreach ($objects as $objectName => $objectValue) {
-            if (is_null($objectValue)) {
+            if (is_null($objectValue) || !is_a($objectValue, BaseObjectInterface::class)) {
                 continue;
             }
+            /** @var BaseObjectInterface $objectValue */
             $arrayToReturn[$objectName] = $objectValue->toArray();
         }
         return $arrayToReturn;

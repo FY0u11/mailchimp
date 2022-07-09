@@ -20,6 +20,8 @@ class Recipients extends BaseObject
     public ?string $list_id;
 
     /**
+     * List settings for the Automation.
+     *
      * @param string $store_id     The id of the store.
      * @param string|null $list_id The id of the List
      */

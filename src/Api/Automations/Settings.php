@@ -2,10 +2,12 @@
 
 namespace Mailchimp\Api\Automations;
 
+use Mailchimp\Api\BaseObject;
+
 /**
  * The settings for the Automation workflow.
  */
-class Settings extends \Mailchimp\Api\BaseObject
+class Settings extends BaseObject
 {
     /**
      * @var string|null The 'from' name for the Automation (not an email address).
@@ -18,6 +20,8 @@ class Settings extends \Mailchimp\Api\BaseObject
     public ?string $reply_to;
 
     /**
+     * The settings for the Automation workflow.
+     *
      * @param string|null $from_name The 'from' name for the Automation (not an email address).
      * @param string|null $reply_to  The reply-to email address for the Automation.
      */
