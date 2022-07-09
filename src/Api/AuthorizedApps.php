@@ -8,6 +8,8 @@ namespace Mailchimp\Api;
 class AuthorizedApps extends BaseApi
 {
     /**
+     * List authorized apps
+     *
      * Get a list of account exports for a given account.
      *
      * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of
@@ -32,6 +34,8 @@ class AuthorizedApps extends BaseApi
     }
 
     /**
+     * Get authorized app info
+     *
      * Get information about a specific authorized application.
      *
      * @param string $appId              The unique id for the account export.

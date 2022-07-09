@@ -2,21 +2,46 @@
 
 namespace Mailchimp\Api\Automations;
 
+use Mailchimp\Api\Automations\Emails\Emails;
 use Mailchimp\Api\BaseApi;
 use Mailchimp\HttpMethod;
+use Mailchimp\MailchimpInterface;
 
 /**
  * Mailchimp's classic automations feature lets you build a series of emails that send to subscribers when triggered by
  * a specific date, activity, or event. Use the API to manage Automation workflows, emails, and queues. Does not
  * includeCustomer Journeys.
  */
-class Automations extends BaseApi
+class Automations extends BaseApi implements AutomationsInterface
 {
-    public const STATUS_SAVE = 'save';
-    public const STATUS_PAUSED = 'paused';
-    public const STATUS_SENDING = 'sending';
+    /**
+     * @var Emails Manage individual emails in a classic automation workflow.
+     */
+    public Emails $emails;
 
     /**
+     * @var Queue Manage list member queues for classic automation emails.
+     */
+    public Queue $queue;
+
+    /**
+     * Mailchimp's classic automations feature lets you build a series of emails that send to subscribers when triggered
+     * by a specific date, activity, or event. Use the API to manage Automation workflows, emails, and queues. Does not
+     * includeCustomer Journeys.
+     *
+     * @param MailchimpInterface $mailchimp
+     */
+    public function __construct(MailchimpInterface $mailchimp)
+    {
+        parent::__construct($mailchimp);
+
+        $this->emails = new Emails($mailchimp);
+        $this->queue = new Queue($mailchimp);
+    }
+
+    /**
+     * List automations
+     *
      * Get a summary of an account's classic automations.
      *
      * @param array|null $fields              A comma-separated list of fields to return. Reference parameters of
@@ -56,6 +81,8 @@ class Automations extends BaseApi
     }
 
     /**
+     * Get automation info
+     *
      * Get a summary of an individual classic automation workflow's settings and content. The trigger_settings object
      * returns information for the first email in the workflow.
      *
@@ -75,6 +102,10 @@ class Automations extends BaseApi
     }
 
     /**
+     * Add automation
+     *
+     * Create a new classic automation in your Mailchimp account.
+     *
      * @param Recipients $recipients            List settings for the Automation.
      * @param TriggerSettings $trigger_settings Trigger settings for the Automation.
      * @param Settings|null $settings           The settings for the Automation workflow.
@@ -91,6 +122,8 @@ class Automations extends BaseApi
     }
 
     /**
+     * Start automation emails
+     *
      * Start all emails in a classic automation workflow.
      *
      * @param string $workflowId The unique id for the Automation workflow.
@@ -107,6 +140,8 @@ class Automations extends BaseApi
     }
 
     /**
+     * Pause automation emails
+     *
      * Pause all emails in a specific classic automation workflow.
      *
      * @param string $workflowId The unique id for the Automation workflow.
@@ -123,6 +158,8 @@ class Automations extends BaseApi
     }
 
     /**
+     * Archive automation
+     *
      * Archiving will permanently end your automation and keep the report data. You’ll be able to replicate your
      * archived automation, but you can’t restart it.
      *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mailchimp\Api\Emails;
+namespace Mailchimp\Api\Automations\Emails;
 
 interface DelayInterface
 {

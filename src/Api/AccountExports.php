@@ -10,6 +10,8 @@ use Mailchimp\HttpMethod;
 class AccountExports extends BaseApi
 {
     /**
+     * List account exports
+     *
      * Get a list of account exports for a given account.
      *
      * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of
@@ -34,6 +36,8 @@ class AccountExports extends BaseApi
     }
 
     /**
+     * Get account export info
+     *
      * Get information about a specific account export.
      *
      * @param string $exportId           The unique id for the account export.
@@ -52,6 +56,8 @@ class AccountExports extends BaseApi
     }
 
     /**
+     * Add export
+     *
      * Create a new account export in your Mailchimp account.
      *
      * @param array $include_stages        The stages of an account export to include.

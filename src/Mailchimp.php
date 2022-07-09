@@ -5,9 +5,8 @@ namespace Mailchimp;
 use Mailchimp\Api\AccountExports;
 use Mailchimp\Api\AuthorizedApps;
 use Mailchimp\Api\Automations\Automations;
-use Mailchimp\Api\Emails\Emails;
-use Symfony\Component\HttpClient\HttpClient;
 use Mailchimp\Api\Root;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -55,11 +54,6 @@ class Mailchimp implements MailchimpInterface
     public Automations $automations;
 
     /**
-     * @var Emails Manage individual emails in a classic automation workflow.
-     */
-    public Emails $emails;
-
-    /**
      * Mailchimp Marketing API
      */
     public function __construct()
@@ -69,7 +63,6 @@ class Mailchimp implements MailchimpInterface
         $this->accountExports = new AccountExports($this);
         $this->authorizedApps = new AuthorizedApps($this);
         $this->automations = new Automations($this);
-        $this->emails = new Emails($this);
     }
 
     /**

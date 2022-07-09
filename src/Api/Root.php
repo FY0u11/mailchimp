@@ -9,6 +9,8 @@ namespace Mailchimp\Api;
 class Root extends BaseApi
 {
     /**
+     * List api root resources
+     *
      * Get links to all other resources available in the API.
      *
      * @param array|null $fields         A comma-separated list of fields to return. Reference parameters of

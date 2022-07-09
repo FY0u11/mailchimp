@@ -1,6 +1,6 @@
 <?php
 
-namespace Mailchimp\Api\Emails;
+namespace Mailchimp\Api\Automations\Emails;
 
 use Mailchimp\Api\BaseApi;
 use Mailchimp\HttpMethod;
@@ -11,6 +11,8 @@ use Mailchimp\HttpMethod;
 class Emails extends BaseApi
 {
     /**
+     * List automated emails
+     *
      * Get a summary of the emails in a classic automation workflow.
      *
      * @param string $workflowId The unique id for the Automation workflow.
@@ -22,6 +24,8 @@ class Emails extends BaseApi
     }
 
     /**
+     * Get workflow email info
+     *
      * Get information about an individual classic automation workflow email.
      *
      * @param string $workflowId      The unique id for the Automation workflow.
@@ -34,6 +38,8 @@ class Emails extends BaseApi
     }
 
     /**
+     * Delete workflow email
+     *
      * Removes an individual classic automation workflow email. Emails from certain workflow types, including the
      * Abandoned Cart Email (abandonedCart) and Product Retargeting Email (abandonedBrowse) Workflows, cannot be deleted.
      *
@@ -52,6 +58,8 @@ class Emails extends BaseApi
     }
 
     /**
+     * Update workflow email
+     *
      * Update settings for a classic automation workflow email. Only works with workflows of type: abandonedBrowse,
      * abandonedCart, emailFollowup, or singleWelcome.
      *
@@ -77,6 +85,8 @@ class Emails extends BaseApi
     }
 
     /**
+     * Start automated email
+     *
      * Start an automated email.
      *
      * @param string $workflowId      The unique id for the Automation workflow.
@@ -94,6 +104,8 @@ class Emails extends BaseApi
     }
 
     /**
+     * Pause automated email
+     *
      * Pause an automated email.
      *
      * @param string $workflowId      The unique id for the Automation workflow.
