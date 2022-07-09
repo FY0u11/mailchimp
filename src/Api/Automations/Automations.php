@@ -25,6 +25,11 @@ class Automations extends BaseApi implements AutomationsInterface
     public Queue $queue;
 
     /**
+     * @var RemovedSubscribers Remove subscribers from a classic automation workflow..
+     */
+    public RemovedSubscribers $removedSubscribers;
+
+    /**
      * Mailchimp's classic automations feature lets you build a series of emails that send to subscribers when triggered
      * by a specific date, activity, or event. Use the API to manage Automation workflows, emails, and queues. Does not
      * includeCustomer Journeys.
@@ -37,6 +42,7 @@ class Automations extends BaseApi implements AutomationsInterface
 
         $this->emails = new Emails($mailchimp);
         $this->queue = new Queue($mailchimp);
+        $this->removedSubscribers = new RemovedSubscribers($mailchimp);
     }
 
     /**
