@@ -2,7 +2,6 @@
 
 namespace Mailchimp\Api;
 
-use Mailchimp\Api\BatchOperations\Operations;
 use Mailchimp\HttpMethod;
 
 /**
