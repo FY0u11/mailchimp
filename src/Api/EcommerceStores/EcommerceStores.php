@@ -4,6 +4,7 @@ namespace Mailchimp\Api\EcommerceStores;
 
 use Mailchimp\Api\BaseApi;
 use Mailchimp\HttpMethod;
+use Mailchimp\MailchimpInterface;
 
 /**
  * Connect your E-commerce Store to Mailchimp to take advantage of powerful reporting and personalization features and
@@ -11,6 +12,20 @@ use Mailchimp\HttpMethod;
  */
 class EcommerceStores extends BaseApi
 {
+    /**
+     * @var CartLines
+     * Each Cart contains one or more Cart Lines, which represent a specific Product Variant that a Customer has added
+     * to their shopping cart.
+     */
+    public CartLines $cartLines;
+
+    public function __construct(MailchimpInterface $mailchimp)
+    {
+        parent::__construct($mailchimp);
+
+        $this->cartLines = new CartLines($mailchimp);
+    }
+
     /**
      * List stores
      *
