@@ -9,6 +9,7 @@ use Mailchimp\Api\BatchOperations\BatchOperations;
 use Mailchimp\Api\BatchWebhooks;
 use Mailchimp\Api\CampaignFolders;
 use Mailchimp\Api\Campaigns\Campaigns;
+use Mailchimp\Api\ChimpChatterActivity;
 use Mailchimp\Api\Root;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -87,6 +88,12 @@ class Mailchimp implements MailchimpInterface
     public Campaigns $campaigns;
 
     /**
+     * @var ChimpChatterActivity
+     * Get the latest Chimp Chatter activity from your account.
+     */
+    public ChimpChatterActivity $chimpChatterActivity;
+
+    /**
      * Mailchimp Marketing API
      */
     public function __construct()
@@ -100,6 +107,7 @@ class Mailchimp implements MailchimpInterface
         $this->batchWebhooks = new BatchWebhooks($this);
         $this->campaignFolders = new CampaignFolders($this);
         $this->campaigns = new Campaigns($this);
+        $this->chimpChatterActivity = new ChimpChatterActivity($this);
     }
 
     /**
