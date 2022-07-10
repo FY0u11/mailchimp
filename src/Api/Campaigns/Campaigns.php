@@ -3,7 +3,9 @@
 namespace Mailchimp\Api\Campaigns;
 
 use Mailchimp\Api\BaseApi;
+use Mailchimp\Api\Campaigns\Content\Content;
 use Mailchimp\HttpMethod;
+use Mailchimp\MailchimpInterface;
 
 /**
  * Campaigns are how you send emails to your Mailchimp list. Use the Campaigns API calls to manage campaigns in your
@@ -11,6 +13,25 @@ use Mailchimp\HttpMethod;
  */
 class Campaigns extends BaseApi implements CampaignsInterface
 {
+    /**
+     * @var Content
+     * Manage the HTML, plain-text, and template content for your Mailchimp campaigns.
+     */
+    public Content $content;
+
+    /**
+     * Campaigns are how you send emails to your Mailchimp list. Use the Campaigns API calls to manage campaigns in your
+     * Mailchimp account.
+     *
+     * @param MailchimpInterface $mailchimp
+     */
+    public function __construct(MailchimpInterface $mailchimp)
+    {
+        parent::__construct($mailchimp);
+
+        $this->content = new Content($mailchimp);
+    }
+
     /**
      * List campaigns
      *
