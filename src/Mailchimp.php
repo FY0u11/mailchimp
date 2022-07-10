@@ -12,6 +12,7 @@ use Mailchimp\Api\Campaigns\Campaigns;
 use Mailchimp\Api\ChimpChatterActivity;
 use Mailchimp\Api\ConnectedSites;
 use Mailchimp\Api\CustomerJourneys;
+use Mailchimp\Api\EcommerceStores\EcommerceStores;
 use Mailchimp\Api\Root;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -108,6 +109,13 @@ class Mailchimp implements MailchimpInterface
     public ConnectedSites $connectedSites;
 
     /**
+     * @var EcommerceStores
+     * Connect your E-commerce Store to Mailchimp to take advantage of powerful reporting and personalization features
+     * and to learn more about your customers.
+     */
+    public EcommerceStores $ecommerceStores;
+
+    /**
      * Mailchimp Marketing API
      */
     public function __construct()
@@ -124,6 +132,7 @@ class Mailchimp implements MailchimpInterface
         $this->chimpChatterActivity = new ChimpChatterActivity($this);
         $this->connectedSites = new ConnectedSites($this);
         $this->customerJourneys = new CustomerJourneys($this);
+        $this->ecommerceStores = new EcommerceStores($this);
     }
 
     /**
