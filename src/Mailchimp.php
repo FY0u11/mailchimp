@@ -11,6 +11,7 @@ use Mailchimp\Api\CampaignFolders;
 use Mailchimp\Api\Campaigns\Campaigns;
 use Mailchimp\Api\ChimpChatterActivity;
 use Mailchimp\Api\ConnectedSites;
+use Mailchimp\Api\CustomerJourneys;
 use Mailchimp\Api\Root;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -95,6 +96,12 @@ class Mailchimp implements MailchimpInterface
     public ChimpChatterActivity $chimpChatterActivity;
 
     /**
+     * @var CustomerJourneys
+     * Manage Customer Journey automated workflows
+     */
+    public CustomerJourneys $customerJourneys;
+
+    /**
      * @var ConnectedSites
      * Manage sites you've connected to your Mailchimp account.
      */
@@ -116,6 +123,7 @@ class Mailchimp implements MailchimpInterface
         $this->campaigns = new Campaigns($this);
         $this->chimpChatterActivity = new ChimpChatterActivity($this);
         $this->connectedSites = new ConnectedSites($this);
+        $this->customerJourneys = new CustomerJourneys($this);
     }
 
     /**
