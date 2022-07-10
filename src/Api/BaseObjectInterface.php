@@ -7,7 +7,7 @@ interface BaseObjectInterface
     /**
      * Returns an array representation of the class' properties.
      *
-     * @return array
+     * @return array|object
      */
-    public function toArray(): array;
+    public function toArray();
 }

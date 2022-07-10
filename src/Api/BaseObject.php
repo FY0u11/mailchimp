@@ -7,14 +7,32 @@ class BaseObject implements BaseObjectInterface
     /**
      * @inheritdoc
      */
-    public function toArray(): array
+    public function toArray()
     {
-        $array = json_decode(json_encode($this), true);
-        foreach ($array as $key => $value) {
-            if (is_null($value)) {
-                unset($array[$key]);
+        $classRC = new \ReflectionClass(static::class);
+
+        $dataToReturn = [];
+        foreach ($classRC->getProperties() as $property) {
+            if (is_null($property->getValue($this))) {
+                continue;
+            }
+            if ($property->getType()->isBuiltin()) {
+                $dataToReturn[$property->getName()] = $property->getValue($this);
+                continue;
+            }
+            try {
+                $propertyRC = new \ReflectionClass($property->getType()->getName());
+                if ($propertyRC->isSubclassOf(BaseObjectInterface::class)) {
+                    /** @var BaseObjectInterface $baseObjectProperty */
+                    $baseObjectProperty = $property->getValue($this);
+                    $dataToReturn[$property->getName()] = $baseObjectProperty->toArray();
+                }
+            } catch (\ReflectionException $reflectionException) {
+                continue;
             }
         }
-        return $array;
+
+        // using stdClass for empty objects in order to json_encode() function cast them to '{}'
+        return empty($dataToReturn) ? new \stdClass() : $dataToReturn;
     }
 }

@@ -10,10 +10,10 @@ use Mailchimp\Api\BaseObject;
 class Recipients extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      * The id of the store.
      */
-    public string $store_id;
+    public ?string $store_id;
 
     /**
      * @var string|null
@@ -24,12 +24,12 @@ class Recipients extends BaseObject
     /**
      * List settings for the Automation.
      *
-     * @param string $store_id
+     * @param string|null $store_id
      * The id of the store.
      * @param string|null $list_id
      * The id of the List
      */
-    public function __construct(string $store_id, ?string $list_id=null)
+    public function __construct(?string $store_id=null, ?string $list_id=null)
     {
         $this->list_id = $list_id;
         $this->store_id = $store_id;

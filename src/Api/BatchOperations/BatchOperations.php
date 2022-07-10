@@ -72,7 +72,7 @@ class BatchOperations extends BaseApi
         return $this->mailchimp->call(
             'batches',
             null,
-            $this->parseObjectsToArray(get_defined_vars()),
+            $this->toArray(get_defined_vars()),
             HttpMethod::POST
         );
     }

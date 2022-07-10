@@ -130,7 +130,7 @@ class Automations extends BaseApi implements AutomationsInterface
         return $this->mailchimp->call(
             'automations',
             null,
-            $this->parseObjectsToArray(get_defined_vars()),
+            $this->toArray(get_defined_vars()),
             HttpMethod::POST
         );
     }

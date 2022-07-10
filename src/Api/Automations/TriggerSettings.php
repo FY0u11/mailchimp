@@ -10,18 +10,18 @@ use Mailchimp\Api\BaseObject;
 class TriggerSettings extends BaseObject implements TriggerSettingsInterface
 {
     /**
-     * @var string
+     * @var string|null
      * The type of Automation workflow. Currently, only supports 'abandonedCart'.
      */
-    public string $workflow_type;
+    public ?string $workflow_type;
 
     /**
      * Trigger settings for the Automation.
      *
-     * @param string $workflow_type
+     * @param string|null $workflow_type
      * The type of Automation workflow. Currently, only supports 'abandonedCart'.
      */
-    public function __construct(string $workflow_type=self::WORKFLOW_TYPE_ABANDONED_CART)
+    public function __construct(?string $workflow_type=null)
     {
         $this->workflow_type = $workflow_type;
     }

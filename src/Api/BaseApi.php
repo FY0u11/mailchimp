@@ -20,18 +20,24 @@ class BaseApi implements BaseApiInterface
     }
 
     /**
-     * @param array $objects
+     * @param array $properties
+     * @param array|null $excludedFields
      * @return array
      */
-    protected function parseObjectsToArray(array $objects): array
+    protected function toArray(array $properties, ?array $excludedFields=null): array
     {
         $arrayToReturn = [];
-        foreach ($objects as $objectName => $objectValue) {
-            if (is_null($objectValue) || !is_a($objectValue, BaseObjectInterface::class)) {
+        $withExcludedFields = !empty($excludedFields);
+        foreach ($properties as $propertyName => $propertyValue) {
+            if (is_null($propertyValue)) {
                 continue;
             }
-            /** @var BaseObjectInterface $objectValue */
-            $arrayToReturn[$objectName] = $objectValue->toArray();
+            if ($withExcludedFields && in_array($propertyName, $excludedFields)) {
+                continue;
+            }
+            $arrayToReturn[$propertyName] = is_a($propertyValue, BaseObjectInterface::class)
+                ? $propertyValue->toArray()
+                : $propertyValue;
         }
         return $arrayToReturn;
     }

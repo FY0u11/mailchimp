@@ -8,6 +8,7 @@ use Mailchimp\Api\Automations\Automations;
 use Mailchimp\Api\BatchOperations\BatchOperations;
 use Mailchimp\Api\BatchWebhooks;
 use Mailchimp\Api\CampaignFolders;
+use Mailchimp\Api\Campaigns\Campaigns;
 use Mailchimp\Api\Root;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -34,42 +35,56 @@ class Mailchimp implements MailchimpInterface
     private HttpClientInterface $_client;
 
     /**
-     * @var Root The API root resource links to all other resources available in the API. Calling the root directory
-     *           also returns details about the Mailchimp user account.
+     * @var Root
+     * The API root resource links to all other resources available in the API. Calling the root directory also returns
+     * details about the Mailchimp user account.
      */
     public Root $root;
 
     /**
-     * @var AccountExports Generate a new export or download a finished export.
+     * @var AccountExports
+     * Generate a new export or download a finished export.
      */
     public AccountExports $accountExports;
 
     /**
-     * @var AuthorizedApps Manage registered, connected apps for your Mailchimp account with the Authorized Apps endpoints.
+     * @var AuthorizedApps
+     * Manage registered, connected apps for your Mailchimp account with the Authorized Apps endpoints.
      */
     public AuthorizedApps $authorizedApps;
 
     /**
-     * @var Automations Mailchimp's classic automations feature lets you build a series of emails that send to
-     *                  subscribers when triggered by a specific date, activity, or event. Use the API to manage
-     *                  Automation workflows, emails, and queues. Does not include Customer Journeys.
+     * @var Automations
+     * Mailchimp's classic automations feature lets you build a series of emails that send to subscribers when triggered
+     * by a specific date, activity, or event. Use the API to manage Automation workflows, emails, and queues. Does not
+     * include Customer Journeys.
      */
     public Automations $automations;
 
     /**
-     * @var BatchOperations Use batch operations to complete multiple operations with a single call.
+     * @var BatchOperations
+     * Use batch operations to complete multiple operations with a single call.
      */
     public BatchOperations $batchOperations;
 
     /**
-     * @var BatchWebhooks Manage webhooks for batch operations.
+     * @var BatchWebhooks
+     * Manage webhooks for batch operations.
      */
     public BatchWebhooks $batchWebhooks;
 
     /**
-     * @var CampaignFolders Organize your campaigns using folders.
+     * @var CampaignFolders
+     * Organize your campaigns using folders.
      */
     public CampaignFolders $campaignFolders;
+
+    /**
+     * @var Campaigns
+     * Campaigns are how you send emails to your Mailchimp list. Use the Campaigns API calls to manage campaigns in
+     * your Mailchimp account.
+     */
+    public Campaigns $campaigns;
 
     /**
      * Mailchimp Marketing API
@@ -84,6 +99,7 @@ class Mailchimp implements MailchimpInterface
         $this->batchOperations = new BatchOperations($this);
         $this->batchWebhooks = new BatchWebhooks($this);
         $this->campaignFolders = new CampaignFolders($this);
+        $this->campaigns = new Campaigns($this);
     }
 
     /**
@@ -106,8 +122,8 @@ class Mailchimp implements MailchimpInterface
         $queryString = $this->helper->buildQueryString($queryParams);
         $url = $this->_url . $urn . $queryString;
         $options = [];
-        if (!is_null($bodyParams)) {
-            $options['body'] = json_encode($bodyParams, JSON_FORCE_OBJECT);
+        if (!empty($bodyParams)) {
+            $options['body'] = json_encode($bodyParams);
         }
         try {
             return $this->_client->request($method, $url, $options)->toArray();

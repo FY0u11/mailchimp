@@ -87,7 +87,7 @@ class Emails extends BaseApi
         return $this->mailchimp->call(
             "automations/$workflowId/emails/$workflowEmailId",
             null,
-            $this->parseObjectsToArray(get_defined_vars()),
+            $this->toArray(get_defined_vars(), ['workflowId', 'workflowEmailId']),
             HttpMethod::PATCH
         );
     }

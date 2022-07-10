@@ -10,11 +10,11 @@ use Mailchimp\Api\BaseObject;
 class Delay extends BaseObject implements DelayInterface
 {
     /**
-     * @var string
+     * @var string|null
      * The action that triggers the delay of an automation emails. Possible values: "signup", "ecomm_abandoned_browse",
      * or "ecomm_abandoned_cart".
      */
-    public string $action;
+    public ?string $action;
 
     /**
      * @var int|null
@@ -38,7 +38,7 @@ class Delay extends BaseObject implements DelayInterface
     /**
      * The delay settings for an automation email.
      *
-     * @param string $action
+     * @param string|null $action
      * The action that triggers the delay of an automation emails. Possible values: "signup", "ecomm_abandoned_browse",
      * or "ecomm_abandoned_cart".
      * @param int|null $amount
@@ -49,7 +49,7 @@ class Delay extends BaseObject implements DelayInterface
      * Whether the delay settings describe before or after the delay action of an automation email. Possible value:
      * "after".
      */
-    public function __construct(string $action, ?int $amount=null, ?string $type=null, ?string $direction=null)
+    public function __construct(?string $action=null, ?int $amount=null, ?string $type=null, ?string $direction=null)
     {
         $this->action = $action;
         $this->amount = $amount;
