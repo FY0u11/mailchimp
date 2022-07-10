@@ -20,6 +20,12 @@ class Campaigns extends BaseApi implements CampaignsInterface
     public Content $content;
 
     /**
+     * @var Feedback
+     * Post comments, reply to team feedback, and send test emails while you're working together on a Mailchimp campaign.
+     */
+    public Feedback $feedback;
+
+    /**
      * Campaigns are how you send emails to your Mailchimp list. Use the Campaigns API calls to manage campaigns in your
      * Mailchimp account.
      *
@@ -30,6 +36,7 @@ class Campaigns extends BaseApi implements CampaignsInterface
         parent::__construct($mailchimp);
 
         $this->content = new Content($mailchimp);
+        $this->feedback = new Feedback($mailchimp);
     }
 
     /**
