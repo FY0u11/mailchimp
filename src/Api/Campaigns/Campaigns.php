@@ -26,6 +26,12 @@ class Campaigns extends BaseApi implements CampaignsInterface
     public Feedback $feedback;
 
     /**
+     * @var SendChecklist
+     * Review the send checklist for your campaign, and resolve any issues before sending.
+     */
+    public SendChecklist $sendChecklist;
+
+    /**
      * Campaigns are how you send emails to your Mailchimp list. Use the Campaigns API calls to manage campaigns in your
      * Mailchimp account.
      *
@@ -37,6 +43,7 @@ class Campaigns extends BaseApi implements CampaignsInterface
 
         $this->content = new Content($mailchimp);
         $this->feedback = new Feedback($mailchimp);
+        $this->sendChecklist = new SendChecklist($mailchimp);
     }
 
     /**
