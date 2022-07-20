@@ -2,7 +2,7 @@
 
 namespace Mailchimp\Api;
 
-class BaseObject implements BaseObjectInterface
+class BaseObject implements ArrayableInterface
 {
     /**
      * @inheritdoc
@@ -22,8 +22,8 @@ class BaseObject implements BaseObjectInterface
             }
             try {
                 $propertyRC = new \ReflectionClass($property->getType()->getName());
-                if ($propertyRC->isSubclassOf(BaseObjectInterface::class)) {
-                    /** @var BaseObjectInterface $baseObjectProperty */
+                if ($propertyRC->isSubclassOf(ArrayableInterface::class)) {
+                    /** @var ArrayableInterface $baseObjectProperty */
                     $baseObjectProperty = $property->getValue($this);
                     $dataToReturn[$property->getName()] = $baseObjectProperty->toArray();
                 }

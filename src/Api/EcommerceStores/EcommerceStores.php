@@ -3,6 +3,7 @@
 namespace Mailchimp\Api\EcommerceStores;
 
 use Mailchimp\Api\BaseApi;
+use Mailchimp\Api\EcommerceStores\Carts\Carts;
 use Mailchimp\HttpMethod;
 use Mailchimp\MailchimpInterface;
 
@@ -19,11 +20,19 @@ class EcommerceStores extends BaseApi
      */
     public CartLines $cartLines;
 
+    /**
+     * @var Carts
+     * Use Carts to represent unfinished e-commerce transactions. This can be used to create an Abandoned Cart workflow,
+     * or to save a consumer’s shopping cart pending a successful Order.
+     */
+    public Carts $carts;
+
     public function __construct(MailchimpInterface $mailchimp)
     {
         parent::__construct($mailchimp);
 
         $this->cartLines = new CartLines($mailchimp);
+        $this->carts = new Carts($mailchimp);
     }
 
     /**

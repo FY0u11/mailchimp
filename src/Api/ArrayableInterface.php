@@ -2,7 +2,7 @@
 
 namespace Mailchimp\Api;
 
-interface BaseObjectInterface
+interface ArrayableInterface
 {
     /**
      * Returns an array representation of the class' properties.

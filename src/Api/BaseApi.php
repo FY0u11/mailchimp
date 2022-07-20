@@ -35,7 +35,7 @@ class BaseApi implements BaseApiInterface
             if ($withExcludedFields && in_array($propertyName, $excludedFields)) {
                 continue;
             }
-            $arrayToReturn[$propertyName] = is_a($propertyValue, BaseObjectInterface::class)
+            $arrayToReturn[$propertyName] = is_a($propertyValue, ArrayableInterface::class)
                 ? $propertyValue->toArray()
                 : $propertyValue;
         }
