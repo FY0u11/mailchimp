@@ -36,6 +36,12 @@ class EcommerceStores extends BaseApi
     public Customers $customers;
 
     /**
+     * @var OrderLines
+     * Each Order contains one or more Order Lines, which represent a specific Product Variant that a Customer purchases.
+     */
+    public OrderLines $orderLines;
+
+    /**
      * Connect your E-commerce Store to Mailchimp to take advantage of powerful reporting and personalization features
      * and to learn more about your customers.
      *
@@ -48,6 +54,7 @@ class EcommerceStores extends BaseApi
         $this->cartLines = new CartLines($mailchimp);
         $this->carts = new Carts($mailchimp);
         $this->customers = new Customers($mailchimp);
+        $this->orderLines = new OrderLines($mailchimp);
     }
 
     /**

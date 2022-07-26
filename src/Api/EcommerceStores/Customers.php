@@ -104,7 +104,7 @@ class Customers extends BaseApi
      * @param string $customerId
      * The id for the customer of a store.
      * @param Customer $customer
-     * Customer to create
+     * Customer to update
      * @return array
      */
     public function update(
@@ -130,7 +130,7 @@ class Customers extends BaseApi
      * @param string $customerId
      * The id for the customer of a store.
      * @param Customer $customer
-     * Customer to create
+     * Customer to create or update
      * @return array
      */
     public function createOrUpdate(
