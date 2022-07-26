@@ -4,6 +4,7 @@ namespace Mailchimp\Api\EcommerceStores;
 
 use Mailchimp\Api\BaseApi;
 use Mailchimp\Api\EcommerceStores\Carts\Carts;
+use Mailchimp\Api\EcommerceStores\Orders\Orders;
 use Mailchimp\HttpMethod;
 use Mailchimp\MailchimpInterface;
 
@@ -42,6 +43,14 @@ class EcommerceStores extends BaseApi
     public OrderLines $orderLines;
 
     /**
+     * @var Orders
+     * Orders represent successful e-commerce transactions, and this data can be used to provide more detailed campaign
+     * reports, track sales, and personalize emails to your targeted consumers, and view other e-commerce data in your
+     * Mailchimp account.
+     */
+    public Orders $orders;
+
+    /**
      * Connect your E-commerce Store to Mailchimp to take advantage of powerful reporting and personalization features
      * and to learn more about your customers.
      *
@@ -55,6 +64,7 @@ class EcommerceStores extends BaseApi
         $this->carts = new Carts($mailchimp);
         $this->customers = new Customers($mailchimp);
         $this->orderLines = new OrderLines($mailchimp);
+        $this->orders = new Orders($mailchimp);
     }
 
     /**
