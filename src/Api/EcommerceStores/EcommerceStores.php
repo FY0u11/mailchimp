@@ -27,12 +27,27 @@ class EcommerceStores extends BaseApi
      */
     public Carts $carts;
 
+    /**
+     * @var Customers
+     * Add Customers to your Store to track their orders and to view E-Commerce Data for your Mailchimp lists and
+     * campaigns. Each Customer is connected to a Mailchimp list member, so adding a Customer can also add or update a
+     * list member.
+     */
+    public Customers $customers;
+
+    /**
+     * Connect your E-commerce Store to Mailchimp to take advantage of powerful reporting and personalization features
+     * and to learn more about your customers.
+     *
+     * @param MailchimpInterface $mailchimp
+     */
     public function __construct(MailchimpInterface $mailchimp)
     {
         parent::__construct($mailchimp);
 
         $this->cartLines = new CartLines($mailchimp);
         $this->carts = new Carts($mailchimp);
+        $this->customers = new Customers($mailchimp);
     }
 
     /**
