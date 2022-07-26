@@ -51,6 +51,12 @@ class EcommerceStores extends BaseApi
     public Orders $orders;
 
     /**
+     * @var ProductImages
+     * A Product Image represents a specific product image.
+     */
+    public ProductImages $productImages;
+
+    /**
      * Connect your E-commerce Store to Mailchimp to take advantage of powerful reporting and personalization features
      * and to learn more about your customers.
      *
@@ -65,6 +71,7 @@ class EcommerceStores extends BaseApi
         $this->customers = new Customers($mailchimp);
         $this->orderLines = new OrderLines($mailchimp);
         $this->orders = new Orders($mailchimp);
+        $this->productImages = new ProductImages($mailchimp);
     }
 
     /**
